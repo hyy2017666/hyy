@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易演示网页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+        .card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            max-width: 450px;
+        }
+        h1 {
+            margin-bottom: 16px;
+            font-size: 28px;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        button {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            background-color: #ffffff;
+            color: #764ba2;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>你好，网页！👋</h1>
+        <p>这是一个简单的HTML示例页面，包含CSS样式和简单JavaScript交互。点击下方按钮查看效果。</p>
+        <button onclick="showMessage()">点我弹出提示</button>
+    </div>
+
+    <script>
+        function showMessage(){
+            alert("Hello World！网页运行成功🎉");
+        }
+    </script>
+</body>
+</html>
