@@ -3,66 +3,452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>简易演示网页</title>
+    <title>程序员YY · 个人介绍</title>
+    <!-- Font Awesome 图标库 (免费版本) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* 全局重置与字体 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            font-family: system-ui, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(145deg, #0b0e14 0%, #141a24 100%);
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, system-ui, -apple-system, sans-serif;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            color: #fff;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            color: #e8edf5;
         }
-        .card {
-            background: rgba(255,255,255,0.15);
+
+        /* 主卡片 – 磨砂玻璃质感 */
+        .profile-card {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(20, 28, 40, 0.75);
             backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 16px;
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 3.5rem;
+            padding: 2.8rem 3rem;
+            box-shadow: 0 25px 50px -8px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.04);
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        /* 头部区域 – 头像 + 身份 */
+        .profile-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            padding-bottom: 2rem;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2b3b52, #1a2537);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.8rem;
+            font-weight: 600;
+            color: #b7d0f0;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(78, 138, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            letter-spacing: 2px;
+        }
+
+        .avatar-badge {
+            position: absolute;
+            bottom: 2px;
+            right: -2px;
+            background: #1e90ff;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            box-shadow: 0 4px 12px rgba(30, 144, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            letter-spacing: 0.3px;
+            backdrop-filter: blur(4px);
+        }
+
+        .title-group h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            background: linear-gradient(to right, #f0f6ff, #b7d0f0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.2rem;
+        }
+
+        .title-group .subhead {
+            font-size: 1.1rem;
+            color: #9ab0d9;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .title-group .subhead i {
+            color: #4e8aff;
+            font-size: 0.9rem;
+        }
+
+        .title-group .subhead span {
+            background: rgba(78, 138, 255, 0.12);
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(78, 138, 255, 0.15);
+            color: #b7d0f0;
+        }
+
+        /* 网格布局 – 两列 */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1.3fr 0.9fr;
+            gap: 2.5rem;
+            margin-top: 0.8rem;
+        }
+
+        /* 通用卡片区块 */
+        .info-section {
+            background: rgba(12, 18, 28, 0.5);
+            border-radius: 2rem;
+            padding: 1.8rem 1.8rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(4px);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+            height: fit-content;
+        }
+
+        .info-section h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #b7d0f0;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding-bottom: 0.9rem;
+        }
+
+        .info-section h2 i {
+            color: #4e8aff;
+            font-size: 1.2rem;
+            width: 1.8rem;
+        }
+
+        /* 简介文字 */
+        .bio-text {
+            line-height: 1.8;
+            color: #cfdef5;
+            font-size: 1rem;
+            margin-bottom: 1.8rem;
+        }
+        .bio-text strong {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* 标签列表 – 技能/信息 */
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(78, 138, 255, 0.08);
+            padding: 0.35rem 1.1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(78, 138, 255, 0.08);
+            color: #c5d8f5;
+            transition: 0.1s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .tag i {
+            margin-right: 6px;
+            font-size: 0.8rem;
+            color: #4e8aff;
+        }
+
+        .tag.highlight {
+            background: rgba(30, 144, 255, 0.15);
+            border-color: rgba(30, 144, 255, 0.2);
+            color: #e0edff;
+        }
+
+        /* 项目列表 / 经历 */
+        .exp-item {
+            margin-bottom: 1.8rem;
+        }
+        .exp-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .exp-title {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            color: #e0edff;
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .exp-org {
+            color: #8aa4cc;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .exp-desc {
+            font-size: 0.9rem;
+            color: #b7ceec;
+            line-height: 1.6;
+            padding-left: 0.2rem;
+        }
+
+        .exp-desc i {
+            color: #4e8aff;
+            width: 1.2rem;
+            font-size: 0.75rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 0.6rem;
+            margin-top: 0.6rem;
+        }
+
+        .project-tags .tag {
+            background: rgba(255, 255, 255, 0.02);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.9rem;
+            border-color: rgba(255, 255, 255, 0.04);
+        }
+
+        /* 联系方式/社交 */
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+            margin-top: 0.8rem;
+        }
+
+        .social-links a {
+            color: #9ab0d9;
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: 0.15s;
+            border-radius: 40px;
+            padding: 0.25rem 1rem 0.25rem 0.8rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid transparent;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+            background: rgba(78, 138, 255, 0.08);
+            border-color: rgba(78, 138, 255, 0.1);
+        }
+
+        .social-links a i {
+            color: #4e8aff;
+            font-size: 1.1rem;
+            width: 1.6rem;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            max-width: 450px;
         }
-        h1 {
-            margin-bottom: 16px;
-            font-size: 28px;
+
+        hr {
+            border: 0;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            margin: 1.8rem 0 1rem;
         }
-        p {
-            line-height: 1.7;
-            margin-bottom: 24px;
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: #5e769c;
+            text-align: center;
+            margin-top: 1.2rem;
+            letter-spacing: 0.3px;
         }
-        button {
-            padding: 12px 28px;
-            border: none;
-            border-radius: 8px;
-            background-color: #ffffff;
-            color: #764ba2;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
+
+        .footer-note i {
+            color: #4e8aff;
+            margin: 0 4px;
         }
-        button:hover {
-            transform: translateY(-2px);
-            background-color: #f0f0f0;
+
+        /* 响应式 */
+        @media (max-width: 780px) {
+            .profile-card {
+                padding: 2rem 1.5rem;
+                border-radius: 2.5rem;
+            }
+            .grid-2col {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+            .title-group h1 {
+                font-size: 2.2rem;
+            }
+            .profile-header {
+                gap: 1.2rem;
+            }
+            .avatar {
+                width: 90px;
+                height: 90px;
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-card {
+                padding: 1.5rem 1rem;
+                border-radius: 2rem;
+            }
+            .title-group h1 {
+                font-size: 1.8rem;
+            }
+            .info-section {
+                padding: 1.2rem 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>你好，网页！👋</h1>
-        <p>这是一个简单的HTML示例页面，包含CSS样式和简单JavaScript交互。点击下方按钮查看效果。</p>
-        <button onclick="showMessage()">点我弹出提示</button>
+
+<div class="profile-card">
+
+    <!-- 头部 -->
+    <div class="profile-header">
+        <div class="avatar-wrapper">
+            <div class="avatar">YY</div>
+            <span class="avatar-badge"><i class="fas fa-check-circle" style="margin-right: 4px;"></i>抖音</span>
+        </div>
+        <div class="title-group">
+            <h1>程序员YY</h1>
+            <div class="subhead">
+                <i class="fas fa-code"></i> 全栈工程师 · Java & 前端
+                <span><i class="fas fa-map-pin"></i> 北京</span>
+                <span><i class="fas fa-clock"></i> 5-10年经验</span>
+            </div>
+        </div>
     </div>
 
-    <script>
-        function showMessage(){
-            alert("Hello World！网页运行成功🎉");
-        }
+    <!-- 两列核心信息 -->
+    <div class="grid-2col">
+
+        <!-- 左列：关于 + 技能 + 项目 -->
+        <div class="info-section">
+            <h2><i class="fas fa-user-astronaut"></i> 关于我</h2>
+            <div class="bio-text">
+                <strong>👋 你好，我是程序员YY</strong>，一名从业多年的全栈工程师。<br>
+                专注 <strong>Java 后端</strong> 与 <strong>Web 前端</strong> 开发，拥有电商、企业内部管理、在线教育等多行业项目经验[citation:1]。
+                乐于分享技术，也享受用代码解决问题的过程。
+            </div>
+
+            <h2 style="margin-top: 1.8rem;"><i class="fas fa-cog"></i> 技术栈 · 能力</h2>
+            <div class="tag-list">
+                <span class="tag highlight"><i class="fab fa-java"></i> Java</span>
+                <span class="tag"><i class="fab fa-js"></i> JavaScript</span>
+                <span class="tag"><i class="fab fa-html5"></i> HTML5 & CSS</span>
+                <span class="tag"><i class="fas fa-database"></i> 后端架构</span>
+                <span class="tag"><i class="fas fa-cloud"></i> 微服务</span>
+                <span class="tag"><i class="fas fa-mobile-alt"></i> 全栈项目</span>
+                <span class="tag"><i class="fas fa-code-branch"></i> 团队协作</span>
+            </div>
+            <div style="margin-top: 0.8rem; color: #9ab0d9; font-size: 0.85rem;">
+                <i class="fas fa-comment-dots" style="color: #4e8aff; margin-right: 6px;"></i> 交流语言：普通话（母语水平）
+            </div>
+
+            <h2 style="margin-top: 2rem;"><i class="fas fa-folder-open"></i> 项目案例</h2>
+            <div class="exp-item">
+                <div class="exp-title">🎲 彩票网站 · 纯前端</div>
+                <div class="exp-desc">
+                    个人学习与前端技术展示项目，涵盖福彩双色球、3D、体彩排列三、大乐透等彩种。纯前端模拟，无后端请求，数据写死，重在体现界面与交互能力[citation:1]。
+                </div>
+                <div class="project-tags">
+                    <span class="tag"><i class="fas fa-code"></i> 原生JS</span>
+                    <span class="tag"><i class="fas fa-paint-brush"></i> 响应式</span>
+                    <span class="tag"><i class="fas fa-chart-simple"></i> 数据可视化</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右列：经历 + 联系 -->
+        <div class="info-section">
+            <h2><i class="fas fa-briefcase"></i> 工作经历</h2>
+            <div class="exp-item">
+                <div class="exp-title">软件工程师 <span style="font-weight:400; color:#8aa4cc; font-size:0.85rem;">2019.10 – 2025.11</span></div>
+                <div class="exp-org"><i class="fas fa-building"></i> 某外包公司 · 50-200人</div>
+                <div class="exp-desc">
+                    <i class="fas fa-check-circle"></i> 驻场开发，参与某银行核心外包项目，负责后端模块设计与维护[citation:1]。
+                </div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-title">全栈开发（自由接单）<span style="font-weight:400; color:#8aa4cc; font-size:0.85rem;">至今</span></div>
+                <div class="exp-org"><i class="fas fa-globe"></i> 远程 · 项目制</div>
+                <div class="exp-desc">
+                    <i class="fas fa-check-circle"></i> 承接企业管理系统、电商平台、在线教育等全栈项目，提供从需求到交付的完整开发服务[citation:1]。
+                </div>
+            </div>
+
+            <h2 style="margin-top: 2rem;"><i class="fas fa-graduation-cap"></i> 教育背景</h2>
+            <div class="exp-item">
+                <div class="exp-title">长沙理工大学 <span style="font-weight:400; color:#8aa4cc; font-size:0.85rem;">2015 – 2019</span></div>
+                <div class="exp-desc"><i class="fas fa-laptop-code"></i> 计算机专业 · 本科</div>
+            </div>
+
+            <h2 style="margin-top: 2rem;"><i class="fas fa-link"></i> 链接 · 社交</h2>
+            <div class="social-links">
+                <a href=" "><i class="fab fa-tiktok"></i> 抖音 · 程序员YY</a >
+                <a href="#"><i class="fab fa-github"></i> GitHub</a >
+                <a href="#"><i class="fas fa-blog"></i> 技术博客</a >
+                <a href="#"><i class="fab fa-weixin"></i> 微信</a >
+            </div>
+            <div style="margin-top: 1rem; font-size: 0.9rem; color: #8aa4cc;">
+                <i class="fas fa-envelope" style="color:#4e8aff; width:1.6rem;"></i> yy.dev@example.com
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <hr>
+    <div class="footer-note">
+        <i class="fas fa-terminal"></i> 用代码构建理想 · 保持好奇 · 持续迭代 <i class="fas fa-heart" style="color:#ff6b7a;"></i>
+    </div>
+</div>
+
+</body>
+</html>
     </script>
 </body>
 </html>
