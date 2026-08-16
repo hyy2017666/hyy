@@ -1,291 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>简单 · 应用清单</title>
+    <title>探索无限可能</title>
     <style>
-        /* 极简重置 + 干净排版 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            background: #f6f4f0;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
         }
-
-        .card {
-            max-width: 720px;
-            width: 100%;
-            background: white;
-            border-radius: 28px;
-            padding: 2rem 1.8rem 2.2rem;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.04);
-            border: 1px solid #eae7e2;
-        }
-
         h1 {
-            font-weight: 350;
-            font-size: 1.9rem;
-            letter-spacing: -0.3px;
-            color: #1e1b18;
-            margin-bottom: 0.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .sub {
-            color: #7a7268;
-            font-size: 0.9rem;
-            border-left: 3px solid #d4cbc1;
-            padding-left: 0.8rem;
-            margin-bottom: 1.8rem;
-        }
-
-        /* 分类标题 */
-        .category-title {
-            font-weight: 400;
-            font-size: 1.1rem;
-            color: #3a3632;
-            margin: 1.6rem 0 0.8rem 0;
-            padding-bottom: 0.3rem;
-            border-bottom: 1px solid #efebe6;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .category-title:first-of-type {
-            margin-top: 0;
-        }
-
-        /* 应用列表 */
-        .app-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        .app-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.45rem 0.5rem 0.45rem 0.8rem;
-            border-radius: 12px;
-            transition: background 0.1s;
-        }
-
-        .app-item:hover {
-            background: #f4f1ec;
-        }
-
-        .app-item .left {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            flex: 1;
-            min-width: 0;
-        }
-
-        .app-item .app-name {
-            font-size: 0.95rem;
-            color: #22201c;
-            font-weight: 450;
-        }
-
-        .app-item .app-desc {
-            font-size: 0.82rem;
-            color: #8a8278;
-            margin-left: 0.2rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .app-item .link-btn {
-            background: none;
-            border: 1px solid #ddd8d0;
-            padding: 0.15rem 0.9rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            color: #4d4640;
-            text-decoration: none;
-            transition: 0.1s;
-            white-space: nowrap;
-            flex-shrink: 0;
-            margin-left: 0.6rem;
-        }
-
-        .app-item .link-btn:hover {
-            background: #2a2724;
-            border-color: #2a2724;
-            color: white;
-        }
-
-        /* 页脚 */
-        .footer-note {
-            margin-top: 2rem;
-            padding-top: 1.2rem;
-            border-top: 1px solid #eae4dc;
-            font-size: 0.8rem;
-            color: #9e958b;
+            font-size: 4rem;
+            color: #fff;
+            letter-spacing: 0.3em;
             text-align: center;
+            background: linear-gradient(90deg, #a78bfa, #60a5fa, #a78bfa);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
         }
-
-        /* 移动端调整 */
-        @media (max-width: 500px) {
-            .card {
-                padding: 1.5rem 1rem;
-            }
-            .app-item {
-                flex-wrap: wrap;
-                gap: 0.3rem 0;
-            }
-            .app-item .link-btn {
-                margin-left: auto;
-            }
-            .app-item .app-desc {
-                white-space: normal;
-                flex-basis: 100%;
-                margin-left: 1.8rem;
-            }
-            .app-item .left {
-                flex-wrap: wrap;
-            }
+        @keyframes shine {
+            to { background-position: 200% center; }
         }
     </style>
 </head>
 <body>
-
-<div class="card">
-    <h1>🧰 电脑必备</h1>
-    <div class="sub">精选 · 点击直达官网</div>
-
-    <!-- 系统与效率 -->
-    <div class="category-title">⚙️ 系统与效率</div>
-    <ul class="app-list">
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">PowerToys</span>
-                <span class="app-desc">微软效率工具集 · 窗口管理/OCR</span>
-            </span>
-            <a class="link-btn" href=" " target="_blank">官网</a >
-        </li>
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">Everything</span>
-                <span class="app-desc">文件秒搜</span>
-            </span>
-            <a class="link-btn" href="https://www.voidtools.com/" target="_blank">官网</a >
-        </li>
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">7-Zip</span>
-                <span class="app-desc">开源压缩工具</span>
-            </span>
-            <a class="link-btn" href="https://7-zip.org/" target="_blank">官网</a >
-        </li>
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">Snipaste</span>
-                <span class="app-desc">截图 + 贴图</span>
-            </span>
-            <a class="link-btn" href="https://www.snipaste.com/" target="_blank">官网</a >
-        </li>
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">Geek Uninstaller</span>
-                <span class="app-desc">强力卸载 · 清理残留</span>
-            </span>
-            <a class="link-btn" href="https://geekuninstaller.com/" target="_blank">官网</a >
-        </li>
-    </ul>
-
-    <!-- 网络与媒体 -->
-    <div class="category-title">🌐 网络与媒体</div>
-    <ul class="app-list">
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">IDM</span>
-                <span class="app-desc">多线程下载利器</span>
-            </span>
-            <a class="link-btn" href="https://www.internetdownloadmanager.com/" target="_blank">官网</a >
-        </li>
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">PotPlayer</span>
-                <span class="app-desc">全能视频播放器</span>
-            </span>
-            <a class="link-btn" href="https://potplayer.daum.net/" target="_blank">官网</a >
-        </li>
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">OBS Studio</span>
-                <span class="app-desc">开源录屏 / 直播</span>
-            </span>
-            <a class="link-btn" href="https://obsproject.com/" target="_blank">官网</a >
-        </li>
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">向日葵</span>
-                <span class="app-desc">远程控制</span>
-            </span>
-            <a class="link-btn" href="https://sunlogin.oray.com/" target="_blank">官网</a >
-        </li>
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">ToDesk</span>
-                <span class="app-desc">远程协助</span>
-            </span>
-            <a class="link-btn" href="https://www.todesk.com/" target="_blank">官网</a >
-        </li>
-    </ul>
-
-    <!-- 办公与创作 -->
-    <div class="category-title">📝 办公与创作</div>
-    <ul class="app-list">
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">VS Code</span>
-                <span class="app-desc">代码编辑器</span>
-            </span>
-            <a class="link-btn" href="https://code.visualstudio.com/" target="_blank">官网</a >
-        </li>
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">Typora</span>
-                <span class="app-desc">Markdown 编辑器</span>
-            </span>
-            <a class="link-btn" href="https://typora.io/" target="_blank">官网</a >
-        </li>
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">Xmind</span>
-                <span class="app-desc">思维导图</span>
-            </span>
-            <a class="link-btn" href="https://www.xmind.cn/" target="_blank">官网</a >
-        </li>
-        <li class="app-item">
-            <span class="left">
-                <span class="app-name">DBeaver</span>
-                <span class="app-desc">数据库管理</span>
-            </span>
-            <a class="link-btn" href="https://dbeaver.io/" target="_blank">官网</a >
-        </li>
-    </ul>
-
-    <div class="footer-note">点击“官网”按钮直接跳转 · 安全下载</div>
-</div>
-
+    <h1>探索无限可能</h1>
 </body>
 </html>
